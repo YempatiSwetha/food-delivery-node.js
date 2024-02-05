@@ -26,3 +26,5 @@ paths:
           content:
             application/json:
               example: { total_price: 20.5 }
+
+

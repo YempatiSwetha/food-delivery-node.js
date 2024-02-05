@@ -1,4 +1,4 @@
-
+//app.js
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -22,13 +22,15 @@ const swaggerDocument = YAML.load(swaggerPath);
 
 app.use(bodyParser.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use('/api/v1/pricing', priceRouter);
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
 
 
 // Define a simple route for the root path
 app.get('/', (req, res) => {
   //console.log(finalPricing)
-  res.send('Welcome');
+  res.send('Welcome to the Food Delivery API!');
   
 });
 
@@ -36,28 +38,5 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-/*
-
-require('dotenv').config();
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
 
 
-const priceRouter = require('./controllers/priceController');
-
-const app = express();
-app.use(cors());
-app.use(bodyParser.json());
-
-app.use('/api/v1/pricing', priceRouter);
-
-app.get('/', (req, res) => {
-  res.send(priceRouter);
-  res.send('Welcome to the Food Delivery API!');
-});
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});*/
